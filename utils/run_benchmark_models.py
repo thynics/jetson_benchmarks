@@ -29,6 +29,7 @@ class run_benchmark_models():
             self.trt_engine.save_all(commands=commands, models=self.models)
             # Loading Engine Concurrently
             self.trt_engine.load_all(commands=commands, models=self.models)
+            print('------------Finished {}------------\n'.format(self.model_name))
             wall_start_t1 = time.time()
             self.wall_time = wall_start_t1 - wall_start_t0
         return self.download_error_flag
