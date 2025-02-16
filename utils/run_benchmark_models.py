@@ -11,6 +11,7 @@ class run_benchmark_models():
         self.download_error_flag = False
     def execute(self, read_index):
         wall_start_t0 = time.time()
+        print(f'Exec Start: {time.time()}')
         self.model_name, _framework, num_devices, ws_gpu, ws_dla, model_input, model_output, self.batch_size_gpu, self.batch_size_dla = self.benchmark_data.benchmark_csv(read_index)
         print('------------Executing {}------------\n'.format(self.model_name))
         framework = self.benchmark_data.framework2ext()
@@ -29,7 +30,7 @@ class run_benchmark_models():
             self.trt_engine.save_all(commands=commands, models=self.models)
             # Loading Engine Concurrently
             self.trt_engine.load_all(commands=commands, models=self.models)
-            print('------------Finished {}------------\n'.format(self.model_name))
+            print(f'Exec End: {time.time()}')
             wall_start_t1 = time.time()
             self.wall_time = wall_start_t1 - wall_start_t0
         return self.download_error_flag
